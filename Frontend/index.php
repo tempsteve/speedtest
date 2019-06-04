@@ -1,3 +1,4 @@
+<?php require_once('config.php'); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,41 +8,7 @@
 function I(i){return document.getElementById(i);}
 
 //LIST OF TEST SERVERS. See documentation for details if needed
-var SPEEDTEST_SERVERS=[
-	{	//this is my demo server, remove it
-		name:"Speedtest Demo Server 1 (HTTP)", //user friendly name for the server
-		server:"http://mpotdemo.fdossena.com/", //Full URL to the server, complete with / at the end
-		dlURL:"garbage.php",  //path to download test on this server (garbage.php or replacement)
-		ulURL:"empty.php",  //path to upload test on this server (empty.php or replacement)
-		pingURL:"empty.php",  //path to ping/jitter test on this server (empty.php or replacement)
-		getIpURL:"getIP.php"  //path to getIP on this server (getIP.php or replacement)
-	},
-	{	//this is my demo server, remove it
-		name:"Speedtest Demo Server 2 (HTTP)",
-		server:"http://mpotdemo.adolfintel.com/",
-		dlURL:"garbage.php",
-		ulURL:"empty.php",
-		pingURL:"empty.php",
-		getIpURL:"getIP.php"
-	},
-	{	//this is my demo server, remove it
-		name:"Speedtest Demo Server 1 (HTTPS)",
-		server:"https://mpotdemo.fdossena.com/",
-		dlURL:"garbage.php",
-		ulURL:"empty.php",
-		pingURL:"empty.php",
-		getIpURL:"getIP.php"
-	},
-	{	//this is my demo server, remove it
-		name:"Speedtest Demo Server 2 (HTTPS)",
-		server:"https://mpotdemo.adolfintel.com/",
-		dlURL:"garbage.php",
-		ulURL:"empty.php",
-		pingURL:"empty.php",
-		getIpURL:"getIP.php"
-	}
-	//add other servers here, comma separated
-];
+<?=$servers?>
 
 //SERVER AUTO SELECTION
 function initServers(){
@@ -49,12 +16,16 @@ function initServers(){
 		if(server!=null){ //at least 1 server is available
 			I("loading").className="hidden"; //hide loading message
 			//configure speedtest to use the specified server
-			speedtestSettings.url_dl=server.server+server.dlURL;
-			speedtestSettings.url_ul=server.server+server.ulURL;
-			speedtestSettings.url_ping=server.server+server.pingURL;
-			speedtestSettings.url_getIp=server.server+server.getIpURL;
-			speedtestSettings.telemetry_extra=JSON.stringify({server:server.name}); //add server name as extra data in the telemetry
-			I("server").textContent=server.name; //show the name of the server in the UI
+			changeServer(server);
+			//populate server list for manual selection
+			for(var i=0;i<SPEEDTEST_SERVERS.length;i++){
+				if(SPEEDTEST_SERVERS[i].pingT==-1) continue;
+				var option=document.createElement("option");
+				option.value=i;
+				option.textContent=SPEEDTEST_SERVERS[i].name;
+				if(SPEEDTEST_SERVERS[i]===server) option.selected=true;
+				I("server").appendChild(option);
+			}
 			//show test UI
 			I("testWrapper").className="visible";
 			initUI();
@@ -62,6 +33,14 @@ function initServers(){
 			I("message").innerHTML="No servers available";
 		}
 	});
+}
+
+function changeServer(server){
+	speedtestSettings.url_dl=server.server+server.dlURL;
+	speedtestSettings.url_ul=server.server+server.ulURL;
+	speedtestSettings.url_ping=server.server+server.pingURL;
+	speedtestSettings.url_getIp=server.server+server.getIpURL;
+	speedtestSettings.telemetry_extra=JSON.stringify({server:server.name}); //add server name as extra data in the telemetry
 }
 
 var meterBk="#E0E0E0";
@@ -109,7 +88,7 @@ function msToAmount(s){
 var w=null; //speedtest worker
 var data=null; //data from worker
 var speedtestSettings={
-	//add test settings here if you want
+	telemetry_level:"basic"
 };
 function startStop(){
 	if(w!=null){
@@ -118,20 +97,37 @@ function startStop(){
 		w=null;
 		data=null;
 		I("startStopBtn").className="";
+		I("server").disabled=false;
 		initUI();
 	}else{
 		//test is not running, begin
 		w=new Worker('speedtest_worker.min.js');
 		w.postMessage('start '+JSON.stringify(speedtestSettings)); //Add optional parameters as a JSON object to this command
 		I("startStopBtn").className="running";
+		I("shareArea").style.display="none";
+		I("server").disabled=true;
 		w.onmessage=function(e){
 			data=JSON.parse(e.data);
 			var status=data.testState;
 			if(status>=4){
 				//test completed
 				I("startStopBtn").className="";
+				I("server").disabled=false;
 				w=null;
 				updateUI(true);
+				if(status==4){
+					//if testId is present, show sharing panel, otherwise do nothing
+					try{
+						var testId=Number(data.testId);
+						if(!isNaN(testId)){
+							var shareURL=window.location.href.substring(0,window.location.href.lastIndexOf("/"))+"/results/?id="+testId;
+							I("resultsImg").src=shareURL;
+							I("resultsURL").value=shareURL;
+							I("testId").innerHTML=testId;
+							I("shareArea").style.display="";
+						}
+					}catch(e){}
+				}
 			}
 		};
 	}
@@ -240,6 +236,10 @@ function initUI(){
 	#serverArea{
 		margin-top:1em;
 	}
+	#server{
+		font-size:1em;
+		padding:0.2em;
+	}
 	#test{
 		margin-top:2em;
 		margin-bottom:12em;
@@ -282,6 +282,18 @@ function initUI(){
 	div.testGroup{
 		display:inline-block;
 	}
+	#shareArea{
+		width:95%;
+		max-width:40em;
+		margin:0 auto;
+		margin-top:2em;
+	}
+	#shareArea > *{
+		display:block;
+		width:100%;
+		height:auto;
+		margin: 0.25em 0;
+	}
 	div.visible{
 		animation: fadeIn 0.4s;
 		display:block;
@@ -323,17 +335,17 @@ function initUI(){
 		}
 	}
 </style>
-<title>HTML5 Speedtest</title>
+<title><?=$title?></title>
 </head>
 <body onload="initServers()">
-<h1>HTML5 Speedtest</h1>
+<h1><?=$title?></h1>
 <div id="loading" class="visible">
 	<p id="message"><span class="loadCircle"></span>Selecting a server...</p>
 </div>
 <div id="testWrapper" class="hidden">
 	<div id="startStopBtn" onclick="startStop()"></div>
 	<div id="serverArea">
-		Server: <span id="server"></span>
+		Server: <select id="server" onchange="changeServer(SPEEDTEST_SERVERS[this.value])"></select>
 	</div>
 	<div id="test">
 		<div class="testGroup">
@@ -367,8 +379,13 @@ function initUI(){
 		<div id="ipArea">
 			IP Address: <span id="ip"></span>
 		</div>
+		<div id="shareArea" style="display:none">
+			<h3>Share results</h3>
+			<p>Test ID: <span id="testId"></span></p>
+			<input type="text" value="" id="resultsURL" readonly="readonly" onclick="this.select();this.focus();this.select();document.execCommand('copy');alert('Link copied')"/>
+			<img src="" id="resultsImg" />
+		</div>
 	</div>
-	<a href="https://github.com/adolfintel/speedtest">Source code</a>
 </div>
 </body>
 </html>
