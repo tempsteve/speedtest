@@ -5,7 +5,7 @@ $servers = '
 var SPEEDTEST_SERVERS=[
     {
 		name:"Speedtest Server 1 (192.168.135.38)",
-		server:"http://192.168.135.38/Backend/",
+		server:"http://192.168.135.38/",
 		dlURL:"garbage.php",
 		ulURL:"empty.php",
 		pingURL:"empty.php",
@@ -13,7 +13,7 @@ var SPEEDTEST_SERVERS=[
 	},
     {
 		name:"Speedtest Server 2 (192.168.135.39)",
-		server:"http://192.168.135.39/Backend/",
+		server:"http://192.168.135.39/",
 		dlURL:"garbage.php",
 		ulURL:"empty.php",
 		pingURL:"empty.php",
