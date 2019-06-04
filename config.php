@@ -13,7 +13,7 @@ var SPEEDTEST_SERVERS=[
 	},
     {
 		name:"Speedtest Server 2 (192.168.135.39)",
-		server:"http://192.168.135.39/",
+		server:"http://192.168.135.39:60080/speedtest/",
 		dlURL:"garbage.php",
 		ulURL:"empty.php",
 		pingURL:"empty.php",
