@@ -104,7 +104,6 @@ function startStop(){
 		w=new Worker('speedtest_worker.min.js');
 		w.postMessage('start '+JSON.stringify(speedtestSettings)); //Add optional parameters as a JSON object to this command
 		I("startStopBtn").className="running";
-		I("shareArea").style.display="none";
 		I("server").disabled=true;
 		w.onmessage=function(e){
 			data=JSON.parse(e.data);
@@ -115,19 +114,6 @@ function startStop(){
 				I("server").disabled=false;
 				w=null;
 				updateUI(true);
-				if(status==4){
-					//if testId is present, show sharing panel, otherwise do nothing
-					try{
-						var testId=Number(data.testId);
-						if(!isNaN(testId)){
-							var shareURL=window.location.href.substring(0,window.location.href.lastIndexOf("/"))+"/results/?id="+testId;
-							I("resultsImg").src=shareURL;
-							I("resultsURL").value=shareURL;
-							I("testId").innerHTML=testId;
-							I("shareArea").style.display="";
-						}
-					}catch(e){}
-				}
 			}
 		};
 	}
