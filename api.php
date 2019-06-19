@@ -3,6 +3,8 @@ $data_string = ["ip" => $ip];
 $ch = curl_init($api_host.'/api/device/ip_info');
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 100);
+curl_setopt($ch, CURLOPT_TIMEOUT, 100); 
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data_string));
 curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
 $result = curl_exec($ch);

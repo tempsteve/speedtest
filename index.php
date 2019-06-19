@@ -18,20 +18,16 @@ function I(i){return document.getElementById(i);}
 $(document).ready(function(){
 	$('#btn_change_alias').on('click', function() {
 		var alias = $('#port_alias').val();
-		var data = {
-			"item": "alias",
-			"swid": "<?=isset($device)?$device->{'data'}->{'location'}->{'sw_id'}:""?>",
-			"port": "<?=isset($device)?$device->{'data'}->{'location'}->{'sw_port'}:""?>",
-			"alias": alias
-		};
 		$.ajax({
-			url: "<?=$api_host?>/api/device/sw_port",
+			url: "alias.php",
 			type: "POST",
-			contentType: "application/json",
-			dataType: "json",
-			data: JSON.stringify(data),
+			data:{
+				item: "alias",
+				swid: "<?=isset($device)?$device->{'data'}->{'location'}->{'sw_id'}:""?>",
+				port: "<?=isset($device)?$device->{'data'}->{'location'}->{'sw_port'}:""?>",
+				alias: alias
+			},
 			success: function(result) {
-				console.log(result);
 				window.location.reload();
 			}
 		});
