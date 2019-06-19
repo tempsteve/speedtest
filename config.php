@@ -5,12 +5,11 @@ $servers = '
 var SPEEDTEST_SERVERS=[
     {
 		name:"Speedtest Server 1 (192.168.135.38)",
-		server:"http://192.168.135.38:60080/speedtest",
+		server:"http://192.168.135.38:60080/speedtest/",
 		dlURL:"garbage.php",
 		ulURL:"empty.php",
 		pingURL:"empty.php",
-		getIpURL:"getIP.php",
-        ip:"192.168.135.38"
+		getIpURL:"getIP.php"
 	},
     {
 		name:"Speedtest Server 2 (192.168.135.39)",
@@ -18,8 +17,7 @@ var SPEEDTEST_SERVERS=[
 		dlURL:"garbage.php",
 		ulURL:"empty.php",
 		pingURL:"empty.php",
-		getIpURL:"getIP.php",
-        ip:"192.168.135.39"
+		getIpURL:"getIP.php"
 	},
     {
 		name:"Speedtest Demo Server 1 (HTTP)",
@@ -27,8 +25,7 @@ var SPEEDTEST_SERVERS=[
 		dlURL:"garbage.php",
 		ulURL:"empty.php",
 		pingURL:"empty.php",
-		getIpURL:"getIP.php",
-        ip:"8.8.8.8"
+		getIpURL:"getIP.php"
     },
     {
 		name:"Speedtest Demo Server 2 (HTTP)",
@@ -36,12 +33,12 @@ var SPEEDTEST_SERVERS=[
 		dlURL:"garbage.php",
 		ulURL:"empty.php",
 		pingURL:"empty.php",
-		getIpURL:"getIP.php",
-        ip:"8.8.4.4"
+		getIpURL:"getIP.php"
     }
 ];
 ';
 
-$api_host = '192.168.10.66';
+$api_host = 'http://192.168.10.66:60080'; //  setting for api host
+$ip = '192.168.141.30'; // setting the ip to get info
 
 ?>

@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 require_once 'config.php';
 require_once 'api.php';
 ?>
@@ -14,6 +15,28 @@ function I(i){return document.getElementById(i);}
 
 //LIST OF TEST SERVERS. See documentation for details if needed
 <?=$servers?>
+$(document).ready(function(){
+	$('#btn_change_alias').on('click', function() {
+		var alias = $('#port_alias').val();
+		var data = {
+			"item": "alias",
+			"swid": "<?=isset($device)?$device->{'data'}->{'location'}->{'sw_id'}:""?>",
+			"port": "<?=isset($device)?$device->{'data'}->{'location'}->{'sw_port'}:""?>",
+			"alias": alias
+		};
+		$.ajax({
+			url: "<?=$api_host?>/api/device/sw_port",
+			type: "POST",
+			contentType: "application/json",
+			dataType: "json",
+			data: JSON.stringify(data),
+			success: function(result) {
+				console.log(result);
+				window.location.reload();
+			}
+		});
+	});
+});
 </script>
 <script type="text/javascript" src="js/main.js"></script>
 <link rel="stylesheet" href="css/main.css" />
@@ -62,6 +85,17 @@ function I(i){return document.getElementById(i);}
 			IP Address: <span id="ip"></span>
 		</div>
 	</div>
+</div>
+<div class="deviceInfo">
+	<h3>Device Info</h3>
+	<p>Host Name: <?=$device->{'data'}->{'hostname'}?></p>
+	<p>MAC Address: <?=$device->{'data'}->{'mac'}?></p>
+	<p>OS: <?=$device->{'data'}->{'os'}?></p>
+	<p>Location: <?=$device->{'data'}->{'location'}->{'sw_ip'}?> @ <?=$device->{'data'}->{'location'}->{'sw_port'}?></p>
+	<p>Port Alias: <input type="text" value="<?=$device->{'data'}->{'location'}->{'sw_port_alias'}?>" id="port_alias"></p>
+	<? if(isset($device)): ?>
+	<p><button type="button" id="btn_change_alias">Modify Alias</button></p>
+	<? endif ?>
 </div>
 </body>
 </html>

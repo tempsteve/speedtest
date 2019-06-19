@@ -29,7 +29,6 @@ function changeServer(server){
 	speedtestSettings.url_ping=server.server+server.pingURL;
 	speedtestSettings.url_getIp=server.server+server.getIpURL;
 	speedtestSettings.telemetry_extra=JSON.stringify({server:server.name}); //add server name as extra data in the telemetry
-	showDevice(server.ip);
 }
 
 var meterBk="#E0E0E0";

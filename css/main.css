@@ -106,6 +106,9 @@ div.testArea canvas{
 div.testGroup{
     display:inline-block;
 }
+div.deviceInfo{
+    text-align: center;
+}
 #shareArea{
     width:95%;
     max-width:40em;
