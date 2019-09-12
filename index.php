@@ -88,10 +88,10 @@ $(document).ready(function(){
 	<p>MAC Address: <?=$device->{'data'}->{'mac'}?></p>
 	<p>OS: <?=$device->{'data'}->{'os'}?></p>
 	<p>Location: <?=$device->{'data'}->{'location'}->{'sw_ip'}?> @ <?=$device->{'data'}->{'location'}->{'sw_port'}?></p>
-	<p>Port Alias: <input type="text" value="<?=$device->{'data'}->{'location'}->{'sw_port_alias'}?>" id="port_alias"></p>
+	<!-- <p>Port Alias: <input type="text" value="<?=$device->{'data'}->{'location'}->{'sw_port_alias'}?>" id="port_alias"></p>
 	<? if(isset($device)): ?>
 	<p><button type="button" id="btn_change_alias">Modify Alias</button></p>
-	<? endif ?>
+	<? endif ?> -->
 </div>
 </body>
 </html>
