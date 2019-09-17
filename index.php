@@ -78,7 +78,7 @@ $(document).ready(function(){
 			</div>
 		</div>
 		<div id="ipArea">
-			IP Address: <span id="ip"></span>
+			IP Address: <span><?=$ip?></span>
 		</div>
 	</div>
 </div>
