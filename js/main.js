@@ -110,7 +110,7 @@ function startStop(){
 function updateUI(forced){
 	if(!forced&&(!data||!w)) return;
 	var status=data.testState;
-	I("ip").textContent=data.clientIp;
+	// I("ip").textContent=data.clientIp;
 	I("dlText").textContent=(status==1&&data.dlStatus==0)?"...":data.dlStatus;
 	drawMeter(I("dlMeter"),mbpsToAmount(Number(data.dlStatus*(status==1?oscillate():1))),meterBk,dlColor,Number(data.dlProgress),progColor);
 	I("ulText").textContent=(status==3&&data.ulStatus==0)?"...":data.ulStatus;
@@ -144,5 +144,5 @@ function initUI(){
 	I("ulText").textContent="";
 	I("pingText").textContent="";
 	I("jitText").textContent="";
-	I("ip").textContent="";
+	// I("ip").textContent="";
 }
