@@ -89,7 +89,7 @@ function startStop(){
 		initUI();
 	}else{
 		//test is not running, begin
-		w=new Worker('speedtest_worker.min.js');
+		w=new Worker('js/speedtest_worker.min.js');
 		w.postMessage('start '+JSON.stringify(speedtestSettings)); //Add optional parameters as a JSON object to this command
 		I("startStopBtn").className="running";
 		I("server").disabled=true;
