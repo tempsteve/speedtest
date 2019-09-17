@@ -77,13 +77,11 @@ $(document).ready(function(){
 				<div class="unit">ms</div>
 			</div>
 		</div>
-		<div id="ipArea">
-			IP Address: <span><?=$ip?></span>
-		</div>
 	</div>
 </div>
 <div class="deviceInfo">
 	<h3>Device Info</h3>
+	<p>IP Address: <?=$ip?></p>
 	<p>Host Name: <?=$device->{'data'}->{'hostname'}?></p>
 	<p>MAC Address: <?=$device->{'data'}->{'mac'}?></p>
 	<p>OS: <?=$device->{'data'}->{'os'}?></p>
