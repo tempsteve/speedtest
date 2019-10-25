@@ -41,23 +41,23 @@ $(document).ready(function(){
 <body onload="initServers()">
 <h1><?=$title?></h1>
 <div id="loading" class="visible">
-	<p id="message"><span class="loadCircle"></span>Selecting a server...</p>
+	<p id="message"><span class="loadCircle"></span>選擇伺服器中...</p>
 </div>
 <div id="testWrapper" class="hidden">
 	<div id="startStopBtn" onclick="startStop()"></div>
 	<div id="serverArea">
-		Server: <select id="server" onchange="changeServer(SPEEDTEST_SERVERS[this.value])"></select>
+		伺服器： <select id="server" onchange="changeServer(SPEEDTEST_SERVERS[this.value])"></select>
 	</div>
 	<div id="test">
 		<div class="testGroup">
 			<div class="testArea">
-				<div class="testName">Download</div>
+				<div class="testName">下行</div>
 				<canvas id="dlMeter" class="meter"></canvas>
 				<div id="dlText" class="meterText"></div>
 				<div class="unit">Mbps</div>
 			</div>
 			<div class="testArea">
-				<div class="testName">Upload</div>
+				<div class="testName">上行</div>
 				<canvas id="ulMeter" class="meter"></canvas>
 				<div id="ulText" class="meterText"></div>
 				<div class="unit">Mbps</div>
@@ -71,7 +71,7 @@ $(document).ready(function(){
 				<div class="unit">ms</div>
 			</div>
 			<div class="testArea">
-				<div class="testName">Jitter</div>
+				<div class="testName">訊差</div>
 				<canvas id="jitMeter" class="meter"></canvas>
 				<div id="jitText" class="meterText"></div>
 				<div class="unit">ms</div>
@@ -80,16 +80,16 @@ $(document).ready(function(){
 	</div>
 </div>
 <div class="deviceInfo">
-	<h3>Device Info</h3>
-	<p>IP Address: <?=$ip?></p>
-	<p>Host Name: <?=$device->{'data'}->{'hostname'}?></p>
-	<p>MAC Address: <?=$device->{'data'}->{'mac'}?></p>
-	<p>OS: <?=$device->{'data'}->{'os'}?></p>
-	<p>Location: <?=$device->{'data'}->{'location'}->{'sw_ip'}?> @ <?=$device->{'data'}->{'location'}->{'sw_port'}?></p>
+	<h3>設備資訊</h3>
+	<p>IP地址： <?=$ip?></p>
+	<?php if (isset($device)): ?>
+	<p>主機名稱： <?=$device->{'data'}->{'hostname'}?></p>
+	<p>MAC地址： <?=$device->{'data'}->{'mac'}?></p>
+	<p>作業系統： <?=$device->{'data'}->{'os'}?></p>
+	<p>設備位置： <?=$device->{'data'}->{'location'}->{'sw_ip'}?> @ <?=$device->{'data'}->{'location'}->{'sw_port'}?></p>
 	<!-- <p>Port Alias: <input type="text" value="<?=$device->{'data'}->{'location'}->{'sw_port_alias'}?>" id="port_alias"></p>
-	<? if(isset($device)): ?>
-	<p><button type="button" id="btn_change_alias">Modify Alias</button></p>
-	<? endif ?> -->
+	<p><button type="button" id="btn_change_alias">Modify Alias</button></p> -->
+	<?php endif ?>
 </div>
 </body>
 </html>

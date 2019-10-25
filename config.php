@@ -1,5 +1,5 @@
 <?php
-$title = 'Gentrice Speed Test';
+$title = '顯赫資訊 網速測試';
 
 // 提供測速的server清單，被測速的server必須要有speedtest程式，並且有下面列出的四個PHP檔案才可以用
 $servers = '
@@ -33,4 +33,4 @@ if (!empty($_SERVER["HTTP_CLIENT_IP"])) {
 } else {
     $ip = $_SERVER["REMOTE_ADDR"];
 }
-// $ip = '192.168.135.39'; 
+// $ip = '192.168.135.39';
