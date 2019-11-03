@@ -51,20 +51,6 @@ $(document).ready(function(){
 	<div id="test">
 		<div class="testGroup">
 			<div class="testArea">
-				<div class="testName">下行</div>
-				<canvas id="dlMeter" class="meter"></canvas>
-				<div id="dlText" class="meterText"></div>
-				<div class="unit">Mbps</div>
-			</div>
-			<div class="testArea">
-				<div class="testName">上行</div>
-				<canvas id="ulMeter" class="meter"></canvas>
-				<div id="ulText" class="meterText"></div>
-				<div class="unit">Mbps</div>
-			</div>
-		</div>
-		<div class="testGroup">
-			<div class="testArea">
 				<div class="testName">Ping</div>
 				<canvas id="pingMeter" class="meter"></canvas>
 				<div id="pingText" class="meterText"></div>
@@ -77,19 +63,45 @@ $(document).ready(function(){
 				<div class="unit">ms</div>
 			</div>
 		</div>
+		<div class="testGroup">
+			<div class="testArea">
+				<div class="testName">下行</div>
+				<canvas id="dlMeter" class="meter"></canvas>
+				<div id="dlText" class="meterText"></div>
+				<div class="unit">Mbps</div>
+			</div>
+			<div class="testArea">
+				<div class="testName">上行</div>
+				<canvas id="ulMeter" class="meter"></canvas>
+				<div id="ulText" class="meterText"></div>
+				<div class="unit">Mbps</div>
+			</div>
+		</div>
 	</div>
 </div>
 <div class="deviceInfo">
 	<h3>設備資訊</h3>
-	<p>IP地址： <?=$ip?></p>
-	<?php if (isset($device)): ?>
-	<p>主機名稱： <?=$device->{'data'}->{'hostname'}?></p>
-	<p>MAC地址： <?=$device->{'data'}->{'mac'}?></p>
-	<p>作業系統： <?=$device->{'data'}->{'os'}?></p>
-	<p>設備位置： <?=$device->{'data'}->{'location'}->{'sw_ip'}?> @ <?=$device->{'data'}->{'location'}->{'sw_port'}?></p>
+	<table class="deviceTable">
+		<tr>
+			<td style="text-align:right;">IP地址：</td><td style="text-align:left;"><?=$ip?></td>
+		</tr>
+		<?php if (isset($device)): ?>
+		<tr>
+			<td style="text-align:right;">主機名稱：</td><td style="text-align:left;"><?=$device->{'data'}->{'hostname'}?></td>
+		</tr>
+		<tr>
+			<td style="text-align:right;">MAC地址：</td><td style="text-align:left;"><?=$device->{'data'}->{'mac'}?></td>
+		</tr>
+		<tr>
+			<td style="text-align:right;">作業系統：</td><td style="text-align:left;"><?=$device->{'data'}->{'os'}?></td>
+		</tr>
+		<tr>
+			<td style="text-align:right;">設備位置：</td><td style="text-align:left;"><?=$device->{'data'}->{'location'}->{'sw_port'}?> @ <?=$device->{'data'}->{'location'}->{'sw_ip'}?></td>
+		</tr>
+		<?php endif ?>
+	</table>
 	<!-- <p>Port Alias: <input type="text" value="<?=$device->{'data'}->{'location'}->{'sw_port_alias'}?>" id="port_alias"></p>
 	<p><button type="button" id="btn_change_alias">Modify Alias</button></p> -->
-	<?php endif ?>
 </div>
 </body>
 </html>
