@@ -1,5 +1,5 @@
 <?php
-$title = '顯赫資訊';
+$title = 'Siraya SPEEDTEST';
 
 // 提供測速的server清單，被測速的server必須要有speedtest程式，並且有下面列出的四個PHP檔案才可以用
 $servers = '

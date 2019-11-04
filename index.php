@@ -57,7 +57,7 @@ $(document).ready(function(){
 				<div class="unit">ms</div>
 			</div>
 			<div class="testArea">
-				<div class="testName">訊差</div>
+				<div class="testName">Jitter</div>
 				<canvas id="jitMeter" class="meter"></canvas>
 				<div id="jitText" class="meterText"></div>
 				<div class="unit">ms</div>
