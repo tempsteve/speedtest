@@ -23,7 +23,7 @@ var SPEEDTEST_SERVERS=[
 ];
 ';
 
-$api_host = 'http://192.168.10.66:60080'; //  設定取得alias資訊的API Host
+$api_host = 'http://127.0.0.1:60080'; //  設定取得alias資訊的API Host
 
 // 設定本機IP，用來向api_host取得alias資訊
 if (!empty($_SERVER["HTTP_CLIENT_IP"])) {
@@ -33,4 +33,3 @@ if (!empty($_SERVER["HTTP_CLIENT_IP"])) {
 } else {
     $ip = $_SERVER["REMOTE_ADDR"];
 }
-// $ip = '192.168.135.39';
