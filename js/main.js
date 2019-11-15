@@ -7,6 +7,7 @@ function initServers() {
             changeServer(server);
             //populate server list for manual selection
             for (var i = 0; i < SPEEDTEST_SERVERS.length; i++) {
+                // console.log(SPEEDTEST_SERVERS[i].name+' '+SPEEDTEST_SERVERS[i].pingT);
                 if (SPEEDTEST_SERVERS[i].pingT == -1) continue;
                 var option = document.createElement("option");
                 option.value = i;

@@ -5,21 +5,21 @@ $title = 'Siraya SPEEDTEST';
 $servers = '
 var SPEEDTEST_SERVERS=[
     {
-		name:"Speedtest Server 1 (192.168.135.38)",
-		server:"http://192.168.135.38:60080/speedtest/",
-		dlURL:"garbage.php",
-		ulURL:"empty.php",
-		pingURL:"empty.php",
-		getIpURL:"getIP.php"
-	},
+        name:"Speedtest Server 1 (203.72.154.50)",
+        server:"https://nms.ntpc.edu.tw/speedtest/",
+        dlURL:"garbage.php",
+        ulURL:"empty.php",
+        pingURL:"empty.php",
+        getIpURL:"getIP.php"
+    },
     {
-		name:"Speedtest Server 2 (192.168.135.39)",
-		server:"http://192.168.135.39:60080/speedtest/",
-		dlURL:"garbage.php",
-		ulURL:"empty.php",
-		pingURL:"empty.php",
-		getIpURL:"getIP.php"
-	}
+        name:"Speedtest Server 2 (163.20.66.236)",
+        server:"http://163.20.66.236:60080/speedtest/",
+        dlURL:"garbage.php",
+        ulURL:"empty.php",
+        pingURL:"empty.php",
+        getIpURL:"getIP.php"
+    }
 ];
 ';
 
